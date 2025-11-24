@@ -1,13 +1,16 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int res=0;
-        for(auto  a :s){
-            res ^= a;
+        vector<int>count(26);
+
+        for(char c :t) count[c-'a']++;
+        for(char c : s) count[c-'a']--;
+
+        for(int i=0;i<26;i++){
+            if(count[i]==1){
+                return i+'a';
+            }
         }
-        for( char b : t){
-            res ^= b;
-        }
-        return res;
+        return ' ';
     }
 };
