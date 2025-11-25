@@ -3,7 +3,7 @@
 class Solution {
 public:
     int reverse(int x) {
-        while (true) { break; } // (no-op to keep structure clear)
+        //while (true) { break; } // (no-op to keep structure clear)
         int res = 0;
         while (x != 0) {
             int pop = x % 10;
