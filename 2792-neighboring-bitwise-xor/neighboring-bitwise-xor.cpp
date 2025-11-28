@@ -10,7 +10,7 @@ public:
             original[i+1]=original[i]^derived[i];
 
         }
-        if((original[n-1]^original[0])==derived[n-1]) return true;
+        if((original[n-1]^0)==derived[n-1]) return true;
 
         //first check the original[0] =1;
         vector<int>ori(n);
@@ -18,7 +18,7 @@ public:
         for(int i=0;i<n-1;i++){
             ori[i+1]=ori[i]^derived[i];
         }
-        if((ori[n-1]^ori[0])==derived[n-1]) return true;
+        if((ori[n-1]^1)==derived[n-1]) return true;
 
         return false;
     }
