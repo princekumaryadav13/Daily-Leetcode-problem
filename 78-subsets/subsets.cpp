@@ -12,7 +12,7 @@ public:
         sub(nums,i+1,temp); //eclude the current element
          temp.push_back(nums[i]);
         sub(nums,i+1,temp);
-        temp.pop_back();  //include the current element
+         //include the current element
      }
     vector<vector<int>> subsets(vector<int>& nums) {
       vector<int>temp;
