@@ -14,7 +14,9 @@ public:
       sort(key.begin(),key.end());
 
       for(auto k : key){
-        auto v = mp[k];
+        
+        //auto v = mp[k];
+        vector<int>v = mp[k];
         sort(v.begin(),v.end());
         for(auto a : v) ans.push_back(a);
       }
