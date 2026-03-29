@@ -1,26 +1,21 @@
 class Solution {
 public:
     bool checkStrings(string s1, string s2) {
-        int even[26] = {0};
-        int odd[26] = {0};
+        
 
-        int n = s1.length();
-
-        for(int i = 0; i < n; i++) {
-            if(i%2 == 0) { //even indices
-                even[s1[i] - 'a']++;
-                even[s2[i] - 'a']--;
-            } else { //odd indices
-                odd[s1[i] - 'a']++;
-                odd[s2[i] - 'a']--;
-            }
+        int freq1[2][26] = {}, freq2[2][26] = {};
+        
+        for (int i = 0; i < s1.size(); i++) {
+            freq1[i % 2][s1[i] - 'a']++;
+            freq2[i % 2][s2[i] - 'a']++;
         }
-
-        for(int i = 0; i < 26; i++) {
-            if(even[i] != 0 || odd[i] != 0)
-                return false;
+        
+        for (int i = 0; i < 26; i++) {
+            if (freq1[0][i] != freq2[0][i]) return false;
+            if (freq1[1][i] != freq2[1][i]) return false;
         }
-
+        
         return true;
     }
 };
+   
