@@ -13,7 +13,7 @@ public:
         int ecount =0;
 
         for(auto num : nums){
-            if(hasevendigit(num)){
+            if(to_string(num).size()%2==0){
                 ecount++;
             }
         }
