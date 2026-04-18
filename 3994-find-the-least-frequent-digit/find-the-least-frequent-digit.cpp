@@ -1,22 +1,27 @@
 class Solution {
 public:
     int getLeastFrequentDigit(int n) {
-        map<int,int>mp;
-        while(n>0){
-        int a = n%10;
-        n =n/10;
-        mp[a]++;
+        vector<int> mp(10, -1);
+
+        // count frequency
+        while(n > 0){
+            int d = n % 10;
+            if(mp[d] == -1) mp[d] = 1;
+            else mp[d]++;
+            n /= 10;
         }
-        int ans = 0;;
-        int freq = INT_MAX;
-        for(auto b : mp){
-            int c = b.second;
-            int digit = b.first;
-            if(c < freq){
-                freq =c;
-                ans = digit;
+
+        int ans = 0;
+        int mn = INT_MAX;
+
+        // find least frequent digit
+        for(int i = 0; i < 10; i++){
+            if(mp[i] != -1 && mp[i] < mn){
+                mn = mp[i];
+                ans = i;
             }
         }
+
         return ans;
     }
 };
