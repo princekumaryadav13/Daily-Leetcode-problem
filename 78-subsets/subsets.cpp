@@ -6,11 +6,11 @@ public:
             ans.push_back(temp);
           return   ;
         }
-
+       temp.push_back(nums[i]);
         check(nums,temp ,i+1);
-        temp.push_back(nums[i]);
+        temp.pop_back();
         check(nums,temp,i+1);
-        //temp.pop_back();
+        
 
        
 
