@@ -10,7 +10,7 @@ public:
         check(nums,temp ,i+1);
         temp.push_back(nums[i]);
         check(nums,temp,i+1);
-        temp.pop_back();
+        //temp.pop_back();
 
        
 
