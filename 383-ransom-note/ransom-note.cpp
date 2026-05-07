@@ -1,14 +1,14 @@
 class Solution {
 public:
     bool canConstruct(string r, string m) {
-        unordered_map<int,int>mp;
+       vector<int>v(26,0);
         for(auto c :m){
-            mp[c]++;
+            v[c-'a']++;
 
         }
         for(auto c : r){
-            mp[c]--;
-            if(mp[c]<0)return false;
+           v[c-'a']--;
+            if(v[c-'a']<0)return false;
         }
         return true;
     }
