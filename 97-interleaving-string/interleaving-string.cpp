@@ -1,46 +1,46 @@
 class Solution {
 public:
-    bool solve(int i, int j, string& s1, string& s2, string& s3,
-               vector<vector<int>>& dp) {
-
-        // Both strings completely used
-        if (i == s1.size() && j == s2.size()) {
-            return true;
-        }
-
-        // Already calculated
-        if (dp[i][j] != -1) {
-            return dp[i][j];
-        }
-
-        bool takeS1 = false;
-        bool takeS2 = false;
-
-        // Take character from s1
-        if (i < s1.size() && s1[i] == s3[i + j]) {
-            takeS1 = solve(i + 1, j, s1, s2, s3, dp);
-        }
-
-        // Take character from s2
-        if (j < s2.size() && s2[j] == s3[i + j]) {
-            takeS2 = solve(i, j + 1, s1, s2, s3, dp);
-        }
-
-        return dp[i][j] = takeS1 || takeS2;
-    }
-
     bool isInterleave(string s1, string s2, string s3) {
 
         int n = s1.size();
         int m = s2.size();
 
         // Length check
-        if (n + m != s3.size()) {
+        if(n + m != s3.size())
             return false;
+
+        vector<vector<bool>> dp(
+            n + 1,
+            vector<bool>(m + 1, false)
+        );
+
+        // Base case
+        dp[0][0] = true;
+
+        for(int i = 0; i <= n; i++) {
+
+            for(int j = 0; j <= m; j++) {
+
+                // Already initialized
+                if(i == 0 && j == 0)
+                    continue;
+
+                // Take character from s1
+                if(i > 0 &&
+                   s1[i-1] == s3[i+j-1]) {
+
+                    dp[i][j] = dp[i][j] || dp[i-1][j];
+                }
+
+                // Take character from s2
+                if(j > 0 &&
+                   s2[j-1] == s3[i+j-1]) {
+
+                    dp[i][j] = dp[i][j] || dp[i][j-1];
+                }
+            }
         }
 
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
-
-        return solve(0, 0, s1, s2, s3, dp);
+        return dp[n][m];
     }
 };
