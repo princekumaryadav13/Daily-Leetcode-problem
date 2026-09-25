@@ -1,25 +1,35 @@
 class Solution {
 public:
     int n, m;
-     int solve(int i ,int j, vector<vector<int>>&obstacleGrid,vector<vector<int>>&dp){
-        if(i==m-1 &&j == n-1){
-            return 1;
-        }
-        if(i>=m || j>=n || obstacleGrid[i][j]==1){
-            return 0;
-        }
-        if(dp[i][j]!=INT_MAX){
-            return dp[i][j];
-        }
-        return dp[i][j] = solve(i+1,j,obstacleGrid,dp)+solve(i,j+1,obstacleGrid,dp);
-     }
+    
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-         m = obstacleGrid.size();
-         n= obstacleGrid[0].size();
-        if(obstacleGrid[m-1][n-1]==1)return 0; 
+        m = obstacleGrid.size();
+        n = obstacleGrid[0].size();
+        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1)
+            return 0;
 
-        vector<vector<int>>dp(m,vector<int>(n,INT_MAX));
+        vector<vector<int>> dp(m, vector<int>(n, 0));
 
-       return solve(0,0,obstacleGrid,dp);
+        dp[0][0] = 1;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                if (obstacleGrid[i][j] == 1) {
+                    dp[i][j] = 0;
+                    continue;
+                }
+
+                // From top
+                if (i > 0)
+                    dp[i][j] += dp[i - 1][j];
+
+                // From left
+                if (j > 0)
+                    dp[i][j] += dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
     }
 };
